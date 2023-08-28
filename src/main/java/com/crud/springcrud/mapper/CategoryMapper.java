@@ -1,9 +1,7 @@
 package com.crud.springcrud.mapper;
 
 import com.crud.springcrud.dto.CategoryDTO;
-import com.crud.springcrud.dto.NewDTO;
 import com.crud.springcrud.entity.CategoryEntity;
-import com.crud.springcrud.entity.NewEntity;
 import org.springframework.stereotype.Component;
 
 @Component

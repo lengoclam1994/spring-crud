@@ -7,6 +7,7 @@ import com.crud.springcrud.mapper.NewMapper;
 import com.crud.springcrud.repository.CategoryRepository;
 import com.crud.springcrud.repository.NewRepository;
 import com.crud.springcrud.service.NewService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -52,17 +53,12 @@ public class NewServiceImpl implements NewService {
     }
 
     @Override
-    public List<NewDTO> findAll(Pageable pageable) {
-        return newRepository.findAll(pageable).getContent().stream().map((item) -> newMapper.toDTO(item)).collect(Collectors.toList());
+    public Page<NewDTO> findAll(Pageable pageable) {
+        return newRepository.findAll(pageable).map((item) -> newMapper.toDTO(item));
     }
 
     @Override
     public List<NewDTO> findAll() {
         return newRepository.findAll().stream().map((item) -> newMapper.toDTO(item)).collect(Collectors.toList());
-    }
-
-    @Override
-    public int totalItem() {
-        return (int) newRepository.count();
     }
 }

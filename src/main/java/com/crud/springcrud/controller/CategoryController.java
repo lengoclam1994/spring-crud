@@ -2,13 +2,13 @@ package com.crud.springcrud.controller;
 
 import com.crud.springcrud.dto.CategoryDTO;
 import com.crud.springcrud.service.CategoryService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@CrossOrigin
+@CrossOrigin
+@RequestMapping("/category")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -17,8 +17,10 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping(value = "/category")
-    public CategoryDTO createNew(@RequestBody CategoryDTO model) {
-        return categoryService.save(model);
+    @PostMapping
+    public ResponseEntity<CategoryDTO> createNew(@RequestBody CategoryDTO model) {
+        CategoryDTO result = categoryService.save(model);
+        return ResponseEntity.ok(result);
     }
+
 }
