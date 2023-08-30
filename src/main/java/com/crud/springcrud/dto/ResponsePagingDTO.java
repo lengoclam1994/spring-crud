@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class NewOutputDTO {
+public class ResponsePagingDTO {
 
     private int page;
     private int totalPage;
