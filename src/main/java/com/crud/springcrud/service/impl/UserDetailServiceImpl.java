@@ -1,6 +1,7 @@
 package com.crud.springcrud.service.impl;
 
 import com.crud.springcrud.entity.Account;
+import com.crud.springcrud.entity.Role;
 import com.crud.springcrud.repository.AccountRepository;
 import com.crud.springcrud.service.AccountService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

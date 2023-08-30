@@ -29,6 +29,11 @@ public class AccountController {
         return ResponseEntity.ok(accountService.getAccounts());
     }
 
+    @GetMapping("{username}")
+    public ResponseEntity<Account> getAccountByUsername(@PathVariable(name = "username") String username) {
+        return ResponseEntity.ok(accountService.findByUsername(username));
+    }
+
     private URI getLocation(Integer id) {
         return fromCurrentRequest().path("{id}").buildAndExpand(id).toUri();
     }

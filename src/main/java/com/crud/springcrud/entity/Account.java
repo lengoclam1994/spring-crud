@@ -13,6 +13,9 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraph(name = "Item.roles",
+        attributeNodes = @NamedAttributeNode("roles")
+)
 public class Account {
 
     @Id
@@ -35,7 +38,7 @@ public class Account {
 
     private boolean locked = false;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "account_role", joinColumns = @JoinColumn(name = "account_id", referencedColumnName = "id")
             , inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;

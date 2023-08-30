@@ -1,0 +1,49 @@
+services:
+  mysqldb:
+    container_name: mysqlcontainerapp
+    image: mysql/mysql-server:latest
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - database:/var/lib/mysql
+    ports:
+      - 3307:3306
+    expose:
+      - 3307
+    environment:
+      MYSQL_DATABASE: news-sb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 123456789
+      MYSQL_ROOT_PASSWORD: 123456789
+      SERVICE_TAGS: prod
+      SERVICE_NAME: msqldb
+    networks:
+      - apinetwork
+
+  apiapplication:
+    container_name: apiapplicationcontainer
+    build: .
+    image: apiapplication:v1
+    restart: unless-stopped
+    ports:
+      - 8089:8089
+    expose:
+      - 8089
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://192.168.1.14:3306/news-sb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: 'root'
+      MYSQL_PASSWORD: 123456789
+      MYSQL_ROOT_PASSWORD: 123456789
+      SERVICE_TAGS: prod
+      SERVICE_NAME: springapi
+    depends_on:
+      - mysqldb
+    networks:
+      - apinetwork
+
+volumes:
+  database:
+
+networks:
+  apinetwork:
+    driver: bridge
